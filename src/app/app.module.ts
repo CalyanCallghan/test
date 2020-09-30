@@ -9,6 +9,10 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { AlertComponentComponent } from './alert-component/alert-component.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateAdminComponent } from './create-admin/create-admin.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     CreateEmployeeComponent,
     EmployeeDetailsComponent,
     EmployeeListComponent,
-    UpdateEmployeeComponent
+    UpdateEmployeeComponent,
+    LoginComponent,
+    AlertComponentComponent,
+    CreateAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,8 +32,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

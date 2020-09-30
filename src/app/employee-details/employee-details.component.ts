@@ -11,7 +11,6 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeDetailsComponent implements OnInit {
   id: number;
   employee: Employee;
-
   constructor(private route: ActivatedRoute,private router: Router,
     private employeeService: EmployeeService) { }
 

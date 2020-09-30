@@ -29,4 +29,12 @@ export class EmployeeService {
   getEmployeesList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+
+  isPresent(email: String,userId: String): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${email}/${userId}`);
+  }
+  createAdmin(admin: Object): Observable<Object> {
+    this.baseUrl = 'http://localhost:8086/springboot-crud-rest/api/v1/admin';
+    return this.http.post(`${this.baseUrl}`, admin);
+  }
 }
