@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { AlertComponentComponent } from './alert-component/alert-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
     LoginComponent,
     AlertComponentComponent,
     CreateAdminComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

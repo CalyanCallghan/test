@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 import { AlertServiceService } from '../alert-service.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Employee } from '../employee';
 import { CanshowService } from '../canshow.service';
 import { LocalstoregeService } from '../localstorege.service';
@@ -13,7 +13,7 @@ import { LocalstoregeService } from '../localstorege.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   login: Login = new Login();
   loading = false;
   loginForm: FormGroup;
@@ -22,20 +22,21 @@ export class LoginComponent implements OnInit {
     private employeeService: EmployeeService, private alertService: AlertServiceService,
     private formBuilder: FormBuilder, private canshowService: CanshowService,
     private localstoregee: LocalstoregeService) { }
-
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      password: ['', Validators.required],
-      email: ['', Validators.required]
-    });
+    
+  form: FormGroup = new FormGroup({
+    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
+  public hasError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
 
-  get f() { return this.loginForm.controls; }
+  get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
     this.employeeService.isPresent(this.f.email.value, this.f.password.value)

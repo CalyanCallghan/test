@@ -12,7 +12,7 @@ import { LocalstoregeService } from './localstorege.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'Angular and SpringBoot';
+  title = '';
   public readonly destroy$: Subject<void> = new Subject<void>();
   isAuthToRead:boolean = false;
   ngOnInit(): void {

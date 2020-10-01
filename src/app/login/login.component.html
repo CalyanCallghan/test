@@ -1,22 +1,29 @@
-<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password">password</label>
-        <input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Login</button>
-        <a [routerLink]="['/create']" class="btn btn-link">Register</a>
-    </div>
-</form>
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <p>
+                <mat-form-field>
+                    <input matInput type="email" placeholder="Mail" formControlName="email" id="email">
+                    <mat-error *ngIf="hasError('email', 'required')">EmailId is required</mat-error>
+                    <mat-error *ngIf="hasError('email', 'email')">Email must be a valid email address</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Password" formControlName="password" id="password">
+                    <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+                </mat-form-field>
+            </p>
+            <mat-nav-list>
+                <a mat-list-item routerLinkActive="active" [routerLink]="['/restPassword']">forgot password?</a>
+            </mat-nav-list>
+
+            <div class="button">
+                <button type="submit" mat-raised-button color="primary">Login</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>

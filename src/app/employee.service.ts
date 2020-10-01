@@ -1,4 +1,4 @@
-  import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class EmployeeService {
   getEmployee(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
-  
+
   createEmployee(employee: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, employee);
   }
@@ -30,11 +30,15 @@ export class EmployeeService {
     return this.http.get(`${this.baseUrl}`);
   }
 
-  isPresent(email: String,userId: String): Observable<any> {
+  isPresent(email: String, userId: String): Observable<any> {
     return this.http.get(`${this.baseUrl}/${email}/${userId}`);
   }
   createAdmin(admin: Object): Observable<Object> {
     this.baseUrl = 'http://localhost:8086/springboot-crud-rest/api/v1/admin';
     return this.http.post(`${this.baseUrl}`, admin);
+  }
+  resetPassword(password: String, code: String): Observable<any> {
+    this.baseUrl = 'http://localhost:8086/springboot-crud-rest/api/v1/resetPassword';
+    return this.http.get(`${this.baseUrl}/${password}/${code}`);
   }
 }

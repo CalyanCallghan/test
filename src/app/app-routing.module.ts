@@ -7,6 +7,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { LoginComponent } from './login/login.component';
 import { RemoveStoregeService } from './remove-storege.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'add', component: CreateEmployeeComponent, canActivate: [AuthService] },
   { path: 'update/:id', component: UpdateEmployeeComponent, canActivate: [AuthService] },
   { path: 'details/:id', component: EmployeeDetailsComponent, canActivate: [AuthService] },
-  { path: 'create', component: CreateAdminComponent }
+  { path: 'create', component: CreateAdminComponent },
+  { path: 'restPassword', component: ResetPasswordComponent }
 ];
 
 @NgModule({
