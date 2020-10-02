@@ -18,10 +18,12 @@ export class LoginComponent {
   loading = false;
   loginForm: FormGroup;
   submitted = false;
+  
   constructor(private route: ActivatedRoute, private router: Router,
     private employeeService: EmployeeService, private alertService: AlertServiceService,
     private formBuilder: FormBuilder, private canshowService: CanshowService,
-    private localstoregee: LocalstoregeService) { }
+    private localstoregee: LocalstoregeService) { 
+    }
     
   form: FormGroup = new FormGroup({
     password: new FormControl('', [Validators.required]),

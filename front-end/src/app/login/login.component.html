@@ -5,8 +5,8 @@
 
             <p>
                 <mat-form-field>
-                    <input matInput type="email" placeholder="Mail" formControlName="email" id="email">
-                    <mat-error *ngIf="hasError('email', 'required')">EmailId is required</mat-error>
+                    <input matInput type="email" placeholder="Email" formControlName="email" id="email">
+                    <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
                     <mat-error *ngIf="hasError('email', 'email')">Email must be a valid email address</mat-error>
                 </mat-form-field>
             </p>
@@ -17,11 +17,16 @@
                 </mat-form-field>
             </p>
             
-            <a mat-button routerLinkActive="active" [routerLink]="['/restPassword']">forgot password?</a>
+            <a mat-button routerLinkActive="active" [routerLink]="['/restPassword']" >forgot password?</a>
+
+            <div class="signup">
+                <a mat-button routerLinkActive="active" [routerLink]="['/create']" color="warn">Sign up</a>
+            </div>
 
             <div class="button">
                 <button type="submit" mat-raised-button color="primary">Login</button>
             </div>
+            
 
         </form>
     </mat-card-content>

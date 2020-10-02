@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertServiceService } from '../alert-service.service';
 import { EmployeeService } from '../employee.service';
 import { Login } from '../login';
-import { MustMatch } from '../MustMatch';
 
 
 @Component({
@@ -13,14 +12,22 @@ import { MustMatch } from '../MustMatch';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent {
-  loginForm: FormGroup;
-  submitted = false;
   login: Login = new Login();
-  form: FormGroup = new FormGroup({
-    code: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    cpassword: new FormControl('', [Validators.required])
-  });
+  form: FormGroup = this.formBuilder.group({
+    code: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    cpassword: ['', [Validators.required]]
+  }, { validator: passwordMatchValidator });
+
+  get cpassword() { return this.form.get('cpassword'); }
+
+  onPasswordInput() {
+
+    if (this.form.hasError('passwordMismatch'))
+      this.cpassword.setErrors({ 'passwordMismatch': true });
+    else
+      this.cpassword.setErrors(null);
+  }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.form.controls[controlName].hasError(errorName);
@@ -28,16 +35,12 @@ export class ResetPasswordComponent {
   constructor(private router: Router, private employeeService: EmployeeService,
     private formBuilder: FormBuilder, private alertService: AlertServiceService) { }
 
-
-  get f() { return this.form.controls; }
-
   onSubmit() {
-    this.submitted = true;
     if (this.form.invalid) {
       return false;
     }
     this.employeeService
-      .resetPassword(this.f.password.value, this.f.code.value).subscribe(data => {
+      .resetPassword(this.form.get('password').value, this.form.get('code').value).subscribe(data => {
         this.login = data;
         if (this.login.status == "Y") {
           this.router.navigate(['/']);
@@ -50,4 +53,11 @@ export class ResetPasswordComponent {
   }
 
 }
+
+export const passwordMatchValidator: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
+  if (formGroup.get('password').value === formGroup.get('cpassword').value)
+    return null;
+  else
+    return { passwordMismatch: true };
+};
 

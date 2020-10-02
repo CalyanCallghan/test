@@ -26,3 +26,11 @@
     display: flex;
     justify-content: flex-end;
   }
+  .signup{
+    display: flex;
+    justify-content: flex-start;
+  }
+  mat-card{
+    background-color: #f8f5f57a;
+  }
+  
