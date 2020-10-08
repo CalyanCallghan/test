@@ -14,19 +14,17 @@ import { Login } from '../login';
 export class ResetPasswordComponent {
   login: Login = new Login();
   form: FormGroup = this.formBuilder.group({
-    code: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    code: ['', [Validators.required,Validators.email,emailDomainValidator]],
+    password: ['', [Validators.required,Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')]],
     cpassword: ['', [Validators.required]]
   }, { validator: passwordMatchValidator });
 
   get cpassword() { return this.form.get('cpassword'); }
+  get password() { return this.form.get('password'); }
 
   onPasswordInput() {
-
     if (this.form.hasError('passwordMismatch'))
       this.cpassword.setErrors({ 'passwordMismatch': true });
-    else
-      this.cpassword.setErrors(null);
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -56,8 +54,23 @@ export class ResetPasswordComponent {
 
 export const passwordMatchValidator: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
   if (formGroup.get('password').value === formGroup.get('cpassword').value)
-    return null;
+    return { passwordMismatch: false };
   else
     return { passwordMismatch: true };
 };
+
+function emailDomainValidator(control: FormControl) {
+  let email = control.value;
+  if (email && email.indexOf("@") != -1) {
+    let [_, domain] = email.split("@");
+    if (domain !== "onpassive.com") {
+      return {
+        emailDomain: {
+          parsedDomain: domain
+        }
+      }
+    }
+  }
+  return null;
+}
 

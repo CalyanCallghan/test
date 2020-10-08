@@ -13,7 +13,8 @@ import { LocalstoregeService } from '../localstorege.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  hide = true;
   login: Login = new Login();
   loading = false;
   loginForm: FormGroup;
@@ -24,10 +25,12 @@ export class LoginComponent {
     private formBuilder: FormBuilder, private canshowService: CanshowService,
     private localstoregee: LocalstoregeService) { 
     }
-    
+    ngOnInit(): void {
+      
+    }
   form: FormGroup = new FormGroup({
     password: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.email,emailDomainValidator])
   });
   public hasError = (controlName: string, errorName: string) => {
     return this.form.controls[controlName].hasError(errorName);
@@ -56,4 +59,19 @@ export class LoginComponent {
       }, error => console.log(error));
   }
 
+}
+
+function emailDomainValidator(control: FormControl) {
+  let email = control.value;
+  if (email && email.indexOf("@") != -1) {
+    let [_, domain] = email.split("@");
+    if (domain !== "onpassive.com") {
+      return {
+        emailDomain: {
+          parsedDomain: domain
+        }
+      }
+    }
+  }
+  return null;
 }

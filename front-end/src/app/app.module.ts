@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MaterialModule } from './material.module';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength'
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { MaterialModule } from './material.module';
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    PasswordStrengthMeterModule,
+    MatPasswordStrengthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

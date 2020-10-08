@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'details/:id', component: EmployeeDetailsComponent, canActivate: [AuthService] },
   { path: 'create', component: CreateAdminComponent },
   { path: 'restPassword', component: ResetPasswordComponent }
-];
+]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
